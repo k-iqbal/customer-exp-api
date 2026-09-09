@@ -1,0 +1,15 @@
+http:
+  host: "0.0.0.0"
+  port: "8083"
+
+processApi:
+  host: "localhost"
+  port: "8082"
+  basePath: "/api"
+  responseTimeoutMS: "300000"
+  longRunningTimeoutMS: "600000"    # import/export do file I/O + Salesforce calls downstream — longer than a single CRUD call
+
+env: "dev"
+
+api:
+  autodiscoveryID: "21156900"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Only what Studio's generated customer-exp-api.xml doesn't already provide.
+  Listener-config and apikit:config live in customer-exp-api.xml.
+  Global_Error_Handler lives in its own file: error-handling.xml.
+  No sftp:config here — exp-api never touches SFTP directly (per its RAML description).
+-->
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+    <!-- Config properties file: YAML only, per confirmed pattern from process-api -->
+    <configuration-properties file="config\config-dev.yaml" />
+
+    <!-- Outbound: exp-api calling customer-process-api (confirmed port 8082) -->
+    <http:request-config name="process-api-httpRequestConfig">
+        <http:request-connection host="${processApi.host}" port="${processApi.port}" protocol="HTTPS"/>
+    </http:request-config>
+
+</mule>
